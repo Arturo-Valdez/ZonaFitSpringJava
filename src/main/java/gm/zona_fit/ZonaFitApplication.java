@@ -95,6 +95,26 @@ public class ZonaFitApplication implements CommandLineRunner {
 				clienteServicio.guardarCliente(cliente);
 				logger.info("Cliente agregado: " + cliente + nl);
 			}
+			case 4 ->{
+				logger.info("--- Modificar Cliente ---" + nl);
+				logger.info("Id cliente: ");
+				var idCliente = Integer.parseInt(consola.nextLine());
+				Cliente cliente = clienteServicio.buscarClientePorId(idCliente);
+				if(cliente != null){
+					logger.info("Nombre: ");
+					var nombre =  consola.nextLine();
+					logger.info("Apellido: ");
+					var apellido = consola.next();
+					logger.info("Membresia: ");
+					var membresia = Integer.parseInt(consola.next());
+					cliente.setNombre(nombre);
+					cliente.setApellido(apellido);
+					cliente.setMembresia(membresia);
+					clienteServicio.guardarCliente(cliente);
+					logger.info("Cliente modificado: " + cliente + nl);
+				}
+			}
+			case 5 -> salir = true;
 		}
 
 		return salir;
