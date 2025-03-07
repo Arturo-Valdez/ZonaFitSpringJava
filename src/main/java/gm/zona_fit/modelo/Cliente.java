@@ -14,8 +14,6 @@ import lombok.*;
 @NoArgsConstructor
 //Generador de constructor con todos los argumento
 @AllArgsConstructor
-//Generador del toString
-@ToString
 //Generador de Equials y HashCode que nos agiliza la busqueda
 @EqualsAndHashCode
 public class Cliente {
@@ -25,4 +23,14 @@ public class Cliente {
     private String nombre;
     private String apellido;
     private Integer membresia;
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", membresia=" + membresia +
+                '}';
+    }
 }
