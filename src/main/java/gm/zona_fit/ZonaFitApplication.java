@@ -80,8 +80,8 @@ public class ZonaFitApplication implements CommandLineRunner {
 				else
 					logger.info("Cliente NO encontrado: " + cliente + nl);
 			}
-			case 3 ->{
-				logger.info("--- Agregar Estudiante ---" + nl);
+			case 3 -> {
+				logger.info("--- Agregar Cliente ---" + nl);
 				logger.info("Nombre: ");
 				var nombre = consola.nextLine();
 				logger.info("Apellido: ");
@@ -95,26 +95,44 @@ public class ZonaFitApplication implements CommandLineRunner {
 				clienteServicio.guardarCliente(cliente);
 				logger.info("Cliente agregado: " + cliente + nl);
 			}
-			case 4 ->{
+			case 4 -> {
 				logger.info("--- Modificar Cliente ---" + nl);
-				logger.info("Id cliente: ");
+				logger.info("Id Cliente: ");
 				var idCliente = Integer.parseInt(consola.nextLine());
 				Cliente cliente = clienteServicio.buscarClientePorId(idCliente);
 				if(cliente != null){
-					logger.info("Nombre: ");
-					var nombre =  consola.nextLine();
+					logger.info("Nombre: " );
+					var nombre = consola.nextLine();
 					logger.info("Apellido: ");
-					var apellido = consola.next();
+					var apellido = consola.nextLine();
 					logger.info("Membresia: ");
-					var membresia = Integer.parseInt(consola.next());
+					var membresia = Integer.parseInt(consola.nextLine());
 					cliente.setNombre(nombre);
 					cliente.setApellido(apellido);
 					cliente.setMembresia(membresia);
 					clienteServicio.guardarCliente(cliente);
 					logger.info("Cliente modificado: " + cliente + nl);
 				}
+				else
+					logger.info("cliente NO encontrado: " + cliente + nl);
 			}
-			case 5 -> salir = true;
+			case 5 -> {
+				logger.info("--- Eliminar Cliente ---" + nl);
+				logger.info("Id Cliente: ");
+				var idCliente = Integer.parseInt(consola.nextLine());
+				var cliente = clienteServicio.buscarClientePorId(idCliente);
+				if(cliente != null){
+					clienteServicio.eliminarCliente(cliente);
+					logger.info("Cliente eliminado: " + cliente + nl);
+				}
+				else
+					logger.info("Cliente No encontrado: " + cliente + nl);
+			}
+			case 6 -> {
+				logger.info("Hasta pronto!" + nl + nl);
+				salir = true;
+			}
+			default -> logger.info("Opcion NO reconocida: " + operaciones + nl);
 		}
 
 		return salir;
